@@ -1,7 +1,7 @@
 package org.net.client;
 
-import org.net.anno.ClientServiceClass;
-import org.net.client.base.IClientService;
+import org.net.anno.Processer;
+import org.net.client.base.ClientProcess;
 import org.net.client.base.IServer;
 import org.net.client.boots.ClientBoots;
 import org.net.utils.ClassSearcher;
@@ -34,15 +34,15 @@ public final class ClientContext {
         route = new ServiceRoute();
     }
     private static Properties config;
-    private static Map<String,IClientService> serviceMap = new ConcurrentHashMap<>();
+    private static Map<String,ClientProcess> serviceMap = new ConcurrentHashMap<>();
     private static ServiceRoute route;
     private static void registerServices(){
         String pkName = config.getProperty("service.path");
-        List<Class> classList = ClassSearcher.searchByPackage(pkName).stream().filter(c->c.getAnnotation(ClientServiceClass.class)!=null||IClientService.class.isAssignableFrom(c)).collect(Collectors.toList());
+        List<Class> classList = ClassSearcher.searchByPackage(pkName).stream().filter(c->c.getAnnotation(Processer.class)!=null||ClientProcess.class.isAssignableFrom(c)).collect(Collectors.toList());
         classList.forEach(c->{
-            ClientServiceClass csc = (ClientServiceClass) c.getAnnotation(ClientServiceClass.class);
+            Processer csc = (Processer) c.getAnnotation(Processer.class);
             try {
-                serverMap.put(csc.name(), (IServer) c.newInstance());
+                serviceMap.put(csc.id(), (ClientProcess) c.newInstance());
             } catch (InstantiationException | IllegalAccessException ignored) {
             }
         });
@@ -61,7 +61,7 @@ public final class ClientContext {
         }
     }
 
-    public static IClientService getService(String name){
+    public static ClientProcess getService(String name){
         return serviceMap.get(name);
     }
 

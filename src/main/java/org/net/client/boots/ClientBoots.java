@@ -63,6 +63,7 @@ public class ClientBoots implements IServer{
     @Override
     public void sendRequestMsg(RequestMsg msg) throws UCException {
         if (authToken!=null)msg.setAuthToken(authToken);
+        if(!channel.isWritable()){connect();}
         ChannelFuture f = channel.writeAndFlush(msg);
         if (!f.isSuccess())throw new UCException(9998);//消息发送失败
     }

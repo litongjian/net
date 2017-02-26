@@ -7,12 +7,14 @@ import java.lang.annotation.Target;
 
 /**
  * 所属项目：net
- * 创建时间：2017/2/26.
+ * 创建时间：2017/2/27.
  * 路径：org.net.anno
- * 概要：服务端方法
+ * 概要：处理方法
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ServerServiceMethod {
-    String name();
+public @interface ProcessMethod {
+    String id();
+    String success()default "";
+    String failed()default "";
 }

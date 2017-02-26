@@ -1,10 +1,9 @@
 package org.net.client.service;
 
-import org.net.anno.ClientServiceClass;
-import org.net.anno.ClientServiceMethod;
-import org.net.client.base.IClientService;
-import org.net.expr.UCException;
-import org.net.msg.Msg;
+import org.net.anno.ProcessMethod;
+import org.net.anno.Processer;
+import org.net.client.base.ClientProcess;
+import org.net.msg.ResponseMsg;
 
 /**
  * 所属项目：net
@@ -12,15 +11,18 @@ import org.net.msg.Msg;
  * 路径：org.net.client.service
  * 概要：客户基础服务
  */
-@ClientServiceClass(name = "base")
-public class ClientBaseService implements IClientService{
-    @Override
-    public void processMsg(Msg msg) throws UCException {
+@Processer(id="base")
+public class ClientBaseService implements ClientProcess {
+
+
+    @ProcessMethod(id = "login_callback",failed = "base@login")
+    public void loginCallBack(ResponseMsg msg) {
 
     }
 
-    @ClientServiceMethod(name = "post_login")
-    public void postLogin(String userName,String password){
+    @ProcessMethod(id = "login")
+    public void login(){
 
     }
+
 }

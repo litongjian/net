@@ -1,0 +1,6 @@
+{
+  "id":"login",
+  "server":"server.login",
+  "uri":"base@login",
+  "param":"username,password"
+}

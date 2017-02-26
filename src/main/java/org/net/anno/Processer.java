@@ -7,12 +7,12 @@ import java.lang.annotation.Target;
 
 /**
  * 所属项目：net
- * 创建时间：2017/2/26.
+ * 创建时间：2017/2/27.
  * 路径：org.net.anno
- * 概要：客户端服务
+ * 概要：处理类
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ClientServiceClass {
-    String name();
+public @interface Processer {
+    String id();
 }

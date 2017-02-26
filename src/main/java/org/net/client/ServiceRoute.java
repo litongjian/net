@@ -1,10 +1,10 @@
 package org.net.client;
 
-import org.net.client.base.IClientService;
-import org.net.expr.UCException;
+import org.net.client.base.ClientProcess;
 import org.net.msg.Msg;
 import org.net.type.MsgType;
 
+import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,19 +22,19 @@ public final class ServiceRoute {
         taskPool.put(msgID,uri);
     }
 
+    public void unregisterTask(String msgID){
+        taskPool.remove(msgID);
+    }
+
     public void routeMsg(Msg msg){
         if (msg.type()== MsgType.REQUEST||msg.type()==MsgType.RESPONSE){
             String uri = taskPool.get(msg.msgID());
             assert uri!=null;
             String[] arr = uri.split("@");
             assert arr.length==2;
-            IClientService service = ClientContext.getService(arr[0]);
-            assert service !=null;
-            try {
-                service.processMsg(msg);
-            } catch (UCException e) {
-                e.printStackTrace();
-            }
+            ClientProcess cp = ClientContext.getService(arr[0]);
+            Method method = cp.getProcessMethodMap().get(arr[1]);
+
         }
     }
 
