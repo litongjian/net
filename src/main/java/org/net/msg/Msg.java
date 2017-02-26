@@ -13,11 +13,13 @@ import java.io.Serializable;
  */
 public interface Msg extends Serializable{
 
-    MsgType getType();
+    MsgType type();
 
     default String id() {
         return UserTools.getCurrentUID();
     }
 
+    String msgID();
 
+    String authToken();
 }

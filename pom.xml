@@ -11,9 +11,15 @@
     <properties>
         <netty.ver>5.0.0.Alpha1</netty.ver>
         <fastjson.ver>1.2.24</fastjson.ver>
+        <dom4j.ver>1.6.1</dom4j.ver>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>${dom4j.ver}</version>
+        </dependency>
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>

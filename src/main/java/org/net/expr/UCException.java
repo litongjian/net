@@ -13,11 +13,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * 路径：org.net.expr
  * 概要：用户异常
  */
-public final class UserException extends Exception {
+public final class UCException extends Exception {
     private static Map<String,String> errMap ;
     private String code;
 
-    public UserException(int code){
+    public UCException(int code){
         this.code = "e"+UserTools.leftPad('0',4,code);
         if (errMap==null) {
             try {

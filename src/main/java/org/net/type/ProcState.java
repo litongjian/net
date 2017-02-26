@@ -6,6 +6,6 @@ package org.net.type;
  * 路径：org.net.type
  * 概要：响应状态
  */
-public enum RespState {
-    SUCCESS,FAILED,ERROR;
+public enum ProcState {
+    SUCCESS,FAILED,ERROR,UNDO
 }
